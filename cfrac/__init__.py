@@ -4,15 +4,18 @@ from math import floor
 
 
 def cfrac_to_fraction(cfrac, limit_denom=None):
-    """Convert a continue fraction to a Fraction"""
-    wcfrac = cfrac[:]
+    """Convert a continued fraction to a Fraction"""
+    terms = cfrac[:]
     assert limit_denom is None or limit_denom >= 1
-    ans = Fraction(wcfrac.pop(0))
-    if wcfrac:
-        ans = ans + (Fraction(1) / cfrac_to_fraction(wcfrac))
-    if limit_denom is not None and ans.denominator > limit_denom:
-        if len(cfrac) > 1:
-            return cfrac_to_fraction(cfrac[:-1], limit_denom)
+    ans = Fraction(terms.pop(0))
+    if terms:
+        ans = ans + (Fraction(1) / cfrac_to_fraction(terms))
+    if (
+        (limit_denom is not None)
+        and (ans.denominator > limit_denom)
+        and (len(cfrac) > 1)
+    ):
+        return cfrac_to_fraction(cfrac[:-1], limit_denom)
     return ans
 
 
