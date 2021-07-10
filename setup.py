@@ -8,7 +8,6 @@ setuptools.setup(name='cfrac',
       author='Ian Bygrave',
       author_email='ian@bygrave.me.uk',
       packages=['cfrac'],
-      package_dir={'cfrac':'src'},
       install_requires=[
           ],
       entry_points = {
