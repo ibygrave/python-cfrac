@@ -1,13 +1,15 @@
+"""Continued Fractions"""
 from fractions import Fraction
 from math import floor
 
 
 def cfrac_to_fraction(cfrac, limit_denom=None):
+    """Convert a continue fraction to a Fraction"""
     wcfrac = cfrac[:]
     assert limit_denom is None or limit_denom >= 1
     ans = Fraction(wcfrac.pop(0))
     if wcfrac:
-        ans = ans + (Fraction(1)/cfrac_to_fraction(wcfrac))
+        ans = ans + (Fraction(1) / cfrac_to_fraction(wcfrac))
     if limit_denom is not None and ans.denominator > limit_denom:
         if len(cfrac) > 1:
             return cfrac_to_fraction(cfrac[:-1], limit_denom)
@@ -15,6 +17,7 @@ def cfrac_to_fraction(cfrac, limit_denom=None):
 
 
 def fraction_to_cfrac(frac):
+    """Convert a Fraction to a continued fraction"""
     ans = []
     while True:
         whole = floor(frac)
